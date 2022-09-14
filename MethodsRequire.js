@@ -94,10 +94,17 @@ function imprimirElementoPorIndiceArreglo() {
                     console.log("Elemento No encontrado")
                 }
             }
-            var fso = CreateObject("Scripting.FileSystemObject");
-            var s = fso.CreateTextFile("C:/test.txt", true);
-            s.writeline(datos);
-            s.Close();
+            let archivo = require('fs')
+            let data = JSON.stringify(valor)
+            archivo.writeFile("arreglos.txt", data, (err) => {
+                if (err)
+                  console.log(err);
+                else {
+                  console.log("Arreglo guardado exitoso.\n");
+                  console.log(fs.readFileSync("arreglos.txt", "utf8"));
+                }
+              });
+
         }
         else {
             console.log(datos)
@@ -112,13 +119,16 @@ function imprimirTodoArreglo(array) {
     try {
         respuesta = readLineSync.question("¿Desea imprimir sus datos en un archivo de texto?")
         if (respuesta == "si") {
-            var fso = CreateObject("Scripting.FileSystemObject");
-            var s = fso.CreateTextFile("C:/test.txt", true);
-
-            for (let i = 0; i < array.length; i++) {
-                s.writeline(array[i]);
-            }
-            s.Close();
+            let archivo = require('fs')
+            let data = JSON.stringify(array)
+            archivo.writeFile("arreglos.txt", data, (err) => {
+                if (err)
+                  console.log(err);
+                else {
+                  console.log("Arreglo guardado exitoso.\n");
+                  console.log(fs.readFileSync("arreglos.txt", "utf8"));
+                }
+              });
 
         } else {
             for (let i = 0; i < array.length; i++) {
@@ -136,12 +146,20 @@ function imprimirSumaPromedioArreglo() {
     try {
         respuesta = readLineSync.question("¿Desea imprimir sus datos en un archivo de texto?")
         if (respuesta == "si") {
-            var fso = CreateObject("Scripting.FileSystemObject");
-            var s = fso.CreateTextFile("C:/test.txt", true);
-
             const sum = array.reduce((a, b) => a + b, 0)
-            s.writeline(sum);
-            s.Close();
+            let archivo = require('fs')
+            let data = JSON.stringify(array)
+            archivo.writeFile("arreglos.txt", sum, (err) => {
+                if (err)
+                  console.log(err);
+                else {
+                  console.log("Arreglo guardado exitoso.\n");
+                  console.log(fs.readFileSync("arreglos.txt", "utf8"));
+                }
+              });
+
+            
+            
 
         } else {
             console.log("Suma total: "+array.reduce((a, b) => a + b, 0))
